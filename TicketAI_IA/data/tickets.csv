@@ -1,0 +1,41 @@
+id,texte,categorie,priorite
+1,Impossible d'accéder à mon compte ENT depuis ce matin,Compte bloqué,Élevé
+2,Je n'arrive pas à me connecter à la plateforme,Compte bloqué,Élevé
+3,Mot de passe expiré et impossible de le réinitialiser,Compte bloqué,Élevé
+4,Mon compte a été désactivé sans raison,Compte bloqué,Critique
+5,Erreur lors de la connexion au portail étudiant,Compte bloqué,Moyen
+6,Impossible de recevoir les notifications sur mon compte,Compte bloqué,Faible
+7,Compte bloqué après plusieurs tentatives de connexion,Compte bloqué,Élevé
+8,Impossible de modifier mon profil utilisateur,Compte bloqué,Moyen
+9,Accès refusé à certaines ressources du compte,Compte bloqué,Moyen
+10,Impossible d'ajouter un document sur mon compte,Compte bloqué,Faible
+11,Le vidéoprojecteur de la salle B12 ne fonctionne plus,Salle / Équipement,Moyen
+12,Le tableau interactif de la salle A5 est éteint,Salle / Équipement,Faible
+13,La salle C3 est trop froide,Salle / Équipement,Faible
+14,Le système de son de l'amphithéâtre ne marche pas,Salle / Équipement,Élevé
+15,Climatisation défectueuse dans la salle D1,Salle / Équipement,Moyen
+16,Le projecteur ne s'allume pas dans la salle E2,Salle / Équipement,Moyen
+17,Problème avec la lumière de la salle F3,Salle / Équipement,Faible
+18,Le rideau de la salle G4 est bloqué,Salle / Équipement,Faible
+19,La porte de la salle H5 ne se ferme pas,Salle / Équipement,Élevé
+20,Problème d'écran interactif dans la salle I6,Salle / Équipement,Moyen
+21,Mon ordinateur ne démarre plus depuis hier,Matériel informatique,Critique
+22,L'imprimante du labo 3 ne fonctionne plus,Matériel informatique,Moyen
+23,Le scanner de documents est en panne,Matériel informatique,Moyen
+24,Problème avec le clavier de mon PC portable,Matériel informatique,Faible
+25,La souris sans fil ne répond pas,Matériel informatique,Faible
+26,L'ordinateur de la salle D2 affiche un écran bleu,Matériel informatique,Critique
+27,Problème de mise à jour Windows sur mon PC,Matériel informatique,Moyen
+28,Mon disque dur externe n'est pas détecté,Matériel informatique,Élevé
+29,L'ordinateur du bureau E3 est très lent,Matériel informatique,Moyen
+30,L'écran de l'ordinateur de la salle F4 est noir,Matériel informatique,Élevé
+31,La télécommande du climatiseur est cassée,Télécommandes climatiseur,Faible
+32,Impossible de régler la température de la salle, Télécommandes climatiseur,Faible
+33,La télécommande ne répond plus,Télécommandes climatiseur,Moyen
+34,Boutons de la télécommande endommagés,Télécommandes climatiseur,Faible
+35,La pile de la télécommande est morte,Télécommandes climatiseur,Faible
+36,Problème avec la télécommande du climatiseur principal,Télécommandes climatiseur,Moyen
+37,La télécommande ne communique pas avec le climatiseur,Télécommandes climatiseur,Moyen
+38,La télécommande s'éteint toute seule,Télécommandes climatiseur,Faible
+39,Impossible de connecter la télécommande à l'appareil,Télécommandes climatiseur,Élevé
+40,La télécommande ne fonctionne que par intermittence,Télécommandes climatiseur,Moyen

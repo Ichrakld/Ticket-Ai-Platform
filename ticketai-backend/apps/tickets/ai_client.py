@@ -19,8 +19,8 @@ def analyze_ticket(title: str, description: str) -> dict:
 
     Expected response from AI service:
     {
-        "category": "Compte bloqué",
-        "priority_score": "Élevé"
+        "categorie": "Compte bloqué",
+        "priorite": "Élevé"
     }
 
     Returns dict with 'category' and 'priority_score', or raises AIServiceError.
@@ -48,8 +48,8 @@ def analyze_ticket(title: str, description: str) -> dict:
     except ValueError:
         raise AIServiceError('AI service returned invalid JSON.')
 
-    category = data.get('category')
-    priority_score = data.get('priority_score')
+    category = data.get('categorie')
+    priority_score = data.get('priorite')
 
     if not category or not priority_score:
         raise AIServiceError('AI service response missing category or priority_score.')

@@ -30,7 +30,7 @@ export default function Profile() {
     try {
       setLoading(true);
       // CORRECT ENDPOINT: /api/auth/me/
-      const response = await api.get('/auth/me/');
+      const response = await api.get('/auth/me');
       
       console.log('Profile data:', response.data);
       
@@ -134,7 +134,7 @@ export default function Profile() {
       }
 
       // CORRECT ENDPOINT: /api/auth/me/
-      await api.put('/auth/me/', updateData);
+      await api.put('/auth/me', updateData);
       
       setForm(prev => ({
         ...prev,
@@ -261,7 +261,7 @@ export default function Profile() {
               <div style={styles.infoRow}>
                 <span style={styles.infoLabel}>Dernière connexion:</span>
                 <span>
-                  {formatDateTime(profile?.last_login || localStorage.getItem('last_login'))}
+                    {formatDateTime(localStorage.getItem('last_login_time'))}
                 </span>
               </div>
             </div>

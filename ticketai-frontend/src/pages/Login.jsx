@@ -34,6 +34,7 @@ export default function Login() {
 
     try {
       const res = await api.post('/auth/login', form);
+      localStorage.setItem('last_login_time', new Date().toISOString());
       login(res.data.user, res.data.access, res.data.refresh);
       navigate('/');
     } catch (err) {

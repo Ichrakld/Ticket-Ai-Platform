@@ -60,9 +60,9 @@ export default function Dashboard() {
 
   const stats = {
     total: tickets.length,
-    open: tickets.filter(t => t.status === 'open').length,
-    inProgress: tickets.filter(t => t.status === 'in progress').length,
-    resolved: tickets.filter(t => t.status === 'resolved').length,
+    open: tickets.filter(t => t.status === 'Ouvert').length,
+    inProgress: tickets.filter(t => t.status === 'En cours').length,
+    resolved: tickets.filter(t => t.status === 'Résolu').length,
   };
 
   if (loading) return <LoadingSpinner />;
@@ -106,9 +106,9 @@ export default function Dashboard() {
           onChange={(e) => setFilter(e.target.value)}
         >
           <option value="all">All Status</option>
-          <option value="open">Open</option>
-          <option value="in progress">In Progress</option>
-          <option value="resolved">Resolved</option>
+          <option value="open">Ouvert</option>
+          <option value="in progress">En cours</option>
+          <option value="resolved">Résolu</option>
           <option value="closed">Closed</option>
         </select>
       </div>
@@ -121,11 +121,11 @@ export default function Dashboard() {
         </div>
         <div style={{...styles.statCard, background: '#fff7e6', borderLeft: '4px solid #fa8c16'}}>
           <span style={styles.statNumber}>{stats.open}</span>
-          <span style={styles.statLabel}>Open</span>
+          <span style={styles.statLabel}>Ouvert</span>
         </div>
         <div style={{...styles.statCard, background: '#f6ffed', borderLeft: '4px solid #52c41a'}}>
           <span style={styles.statNumber}>{stats.resolved}</span>
-          <span style={styles.statLabel}>Resolved</span>
+          <span style={styles.statLabel}>Résolu</span>
         </div>
       </div>
 

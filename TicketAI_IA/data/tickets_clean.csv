@@ -1,0 +1,41 @@
+id,texte,categorie,priorite,texte_nettoye
+1,Impossible d'accéder à mon compte ENT depuis ce matin,Compte bloqué,Élevé,impossible daccéder compte ent depuis matin
+2,Je n'arrive pas à me connecter à la plateforme,Compte bloqué,Élevé,narrive connecter plateforme
+3,Mot de passe expiré et impossible de le réinitialiser,Compte bloqué,Élevé,mot passe expiré impossible réinitialiser
+4,Mon compte a été désactivé sans raison,Compte bloqué,Critique,compte a désactivé sans raison
+5,Erreur lors de la connexion au portail étudiant,Compte bloqué,Moyen,erreur lors connexion portail étudiant
+6,Impossible de recevoir les notifications sur mon compte,Compte bloqué,Faible,impossible recevoir notifications compte
+7,Compte bloqué après plusieurs tentatives de connexion,Compte bloqué,Élevé,compte bloqué après plusieurs tentatives connexion
+8,Impossible de modifier mon profil utilisateur,Compte bloqué,Moyen,impossible modifier profil utilisateur
+9,Accès refusé à certaines ressources du compte,Compte bloqué,Moyen,accès refusé certaines ressources compte
+10,Impossible d'ajouter un document sur mon compte,Compte bloqué,Faible,impossible dajouter document compte
+11,Le vidéoprojecteur de la salle B12 ne fonctionne plus,Salle / Équipement,Moyen,vidéoprojecteur salle b fonctionne plus
+12,Le tableau interactif de la salle A5 est éteint,Salle / Équipement,Faible,tableau interactif salle a éteint
+13,La salle C3 est trop froide,Salle / Équipement,Faible,salle trop froide
+14,Le système de son de l'amphithéâtre ne marche pas,Salle / Équipement,Élevé,système lamphithéâtre marche
+15,Climatisation défectueuse dans la salle D1,Salle / Équipement,Moyen,climatisation défectueuse salle
+16,Le projecteur ne s'allume pas dans la salle E2,Salle / Équipement,Moyen,projecteur sallume salle e
+17,Problème avec la lumière de la salle F3,Salle / Équipement,Faible,problème lumière salle f
+18,Le rideau de la salle G4 est bloqué,Salle / Équipement,Faible,rideau salle g bloqué
+19,La porte de la salle H5 ne se ferme pas,Salle / Équipement,Élevé,porte salle h ferme
+20,Problème d'écran interactif dans la salle I6,Salle / Équipement,Moyen,problème décran interactif salle i
+21,Mon ordinateur ne démarre plus depuis hier,Matériel informatique,Critique,ordinateur démarre plus depuis hier
+22,L'imprimante du labo 3 ne fonctionne plus,Matériel informatique,Moyen,limprimante labo fonctionne plus
+23,Le scanner de documents est en panne,Matériel informatique,Moyen,scanner documents panne
+24,Problème avec le clavier de mon PC portable,Matériel informatique,Faible,problème clavier pc portable
+25,La souris sans fil ne répond pas,Matériel informatique,Faible,souris sans fil répond
+26,L'ordinateur de la salle D2 affiche un écran bleu,Matériel informatique,Critique,lordinateur salle affiche écran bleu
+27,Problème de mise à jour Windows sur mon PC,Matériel informatique,Moyen,problème mise jour windows pc
+28,Mon disque dur externe n'est pas détecté,Matériel informatique,Élevé,disque dur externe nest détecté
+29,L'ordinateur du bureau E3 est très lent,Matériel informatique,Moyen,lordinateur bureau e très lent
+30,L'écran de l'ordinateur de la salle F4 est noir,Matériel informatique,Élevé,lécran lordinateur salle f noir
+31,La télécommande du climatiseur est cassée,Télécommandes climatiseur,Faible,télécommande climatiseur cassée
+32,Impossible de régler la température de la salle, Télécommandes climatiseur,Faible,impossible régler température salle
+33,La télécommande ne répond plus,Télécommandes climatiseur,Moyen,télécommande répond plus
+34,Boutons de la télécommande endommagés,Télécommandes climatiseur,Faible,boutons télécommande endommagés
+35,La pile de la télécommande est morte,Télécommandes climatiseur,Faible,pile télécommande morte
+36,Problème avec la télécommande du climatiseur principal,Télécommandes climatiseur,Moyen,problème télécommande climatiseur principal
+37,La télécommande ne communique pas avec le climatiseur,Télécommandes climatiseur,Moyen,télécommande communique climatiseur
+38,La télécommande s'éteint toute seule,Télécommandes climatiseur,Faible,télécommande séteint toute seule
+39,Impossible de connecter la télécommande à l'appareil,Télécommandes climatiseur,Élevé,impossible connecter télécommande lappareil
+40,La télécommande ne fonctionne que par intermittence,Télécommandes climatiseur,Moyen,télécommande fonctionne intermittence
