@@ -8,16 +8,11 @@ from rest_framework_simplejwt.tokens import RefreshToken
 
 from apps.audit.utils import log_action
 from .models import Role
-from .serializers import RegisterSerializer, UserPublicSerializer
+from .serializers import RegisterSerializer, UserPublicSerializer, CustomTokenObtainPairSerializer
 from .throttles import AuthAnonThrottle
 
 
 class RegisterView(APIView):
-    """
-    POST /api/auth/register
-    Open to anyone. Role defaults to 'Utilisateur'.
-    Only an Admin JWT can create Technicien/Admin accounts.
-    """
     permission_classes = [AllowAny]
     throttle_classes = [AuthAnonThrottle]
 
@@ -31,7 +26,6 @@ class RegisterView(APIView):
 
         requested_role = serializer.validated_data.get('role', Role.UTILISATEUR)
 
-        # Only admins can create non-Utilisateur accounts
         if requested_role != Role.UTILISATEUR:
             if not request.user.is_authenticated or request.user.role != Role.ADMIN:
                 return Response(
@@ -40,12 +34,7 @@ class RegisterView(APIView):
                 )
 
         user = serializer.save()
-
-        log_action(
-            action='USER_REGISTERED',
-            user=user,
-            ip_address=_get_client_ip(request),
-        )
+        log_action(action='USER_REGISTERED', user=user, ip_address=_get_client_ip(request))
 
         return Response(
             {
@@ -60,15 +49,16 @@ class RegisterView(APIView):
 class LoginView(TokenObtainPairView):
     """
     POST /api/auth/login
-    Returns access + refresh JWT tokens.
+    ✅ FIX : utilise CustomTokenObtainPairSerializer qui ajoute
+    user: { id, email, role, created_at } dans la réponse.
     """
     throttle_classes = [AuthAnonThrottle]
+    serializer_class = CustomTokenObtainPairSerializer  # ← CETTE LIGNE MANQUAIT
 
     def post(self, request, *args, **kwargs):
         response = super().post(request, *args, **kwargs)
 
         if response.status_code == 200:
-            # Log successful login (user resolved from token data)
             from .models import User
             try:
                 user = User.objects.get(email=request.data.get('email', '').lower())
@@ -84,10 +74,6 @@ class LoginView(TokenObtainPairView):
 
 
 class LogoutView(APIView):
-    """
-    POST /api/auth/logout
-    Blacklists the refresh token.
-    """
     permission_classes = [IsAuthenticated]
 
     def post(self, request):
@@ -100,11 +86,7 @@ class LogoutView(APIView):
         try:
             token = RefreshToken(refresh_token)
             token.blacklist()
-            log_action(
-                action='USER_LOGOUT',
-                user=request.user,
-                ip_address=_get_client_ip(request),
-            )
+            log_action(action='USER_LOGOUT', user=request.user, ip_address=_get_client_ip(request))
             return Response({'success': True, 'message': 'Logged out successfully.'})
         except Exception:
             return Response(
@@ -114,7 +96,6 @@ class LogoutView(APIView):
 
 
 class MeView(APIView):
-    """GET /api/auth/me — Returns current user info."""
     permission_classes = [IsAuthenticated]
 
     def get(self, request):
