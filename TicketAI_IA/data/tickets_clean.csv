@@ -1,41 +1,91 @@
 id,texte,categorie,priorite,texte_nettoye
-1,Impossible d'accéder à mon compte ENT depuis ce matin,Compte bloqué,Élevé,impossible daccéder compte ent depuis matin
+1,Impossible d'accéder à mon compte ENT depuis ce matin,Compte bloqué,Élevé,impossible dacceder compte ent depuis matin
 2,Je n'arrive pas à me connecter à la plateforme,Compte bloqué,Élevé,narrive connecter plateforme
-3,Mot de passe expiré et impossible de le réinitialiser,Compte bloqué,Élevé,mot passe expiré impossible réinitialiser
-4,Mon compte a été désactivé sans raison,Compte bloqué,Critique,compte a désactivé sans raison
-5,Erreur lors de la connexion au portail étudiant,Compte bloqué,Moyen,erreur lors connexion portail étudiant
+3,Mot de passe expiré et impossible de le réinitialiser,Compte bloqué,Élevé,mot passe expire impossible reinitialiser
+4,Mon compte a été désactivé sans raison,Compte bloqué,Critique,compte a desactive sans raison
+5,Erreur lors de la connexion au portail étudiant,Compte bloqué,Moyen,erreur lors connexion portail etudiant
 6,Impossible de recevoir les notifications sur mon compte,Compte bloqué,Faible,impossible recevoir notifications compte
-7,Compte bloqué après plusieurs tentatives de connexion,Compte bloqué,Élevé,compte bloqué après plusieurs tentatives connexion
+7,Compte bloqué après plusieurs tentatives de connexion,Compte bloqué,Élevé,compte bloque apres plusieurs tentatives connexion
 8,Impossible de modifier mon profil utilisateur,Compte bloqué,Moyen,impossible modifier profil utilisateur
-9,Accès refusé à certaines ressources du compte,Compte bloqué,Moyen,accès refusé certaines ressources compte
+9,Accès refusé à certaines ressources du compte,Compte bloqué,Moyen,acces refuse certaines ressources compte
 10,Impossible d'ajouter un document sur mon compte,Compte bloqué,Faible,impossible dajouter document compte
-11,Le vidéoprojecteur de la salle B12 ne fonctionne plus,Salle / Équipement,Moyen,vidéoprojecteur salle b fonctionne plus
-12,Le tableau interactif de la salle A5 est éteint,Salle / Équipement,Faible,tableau interactif salle a éteint
+11,Le vidéoprojecteur de la salle B12 ne fonctionne plus,Salle / Équipement,Moyen,videoprojecteur salle b fonctionne plus
+12,Le tableau interactif de la salle A5 est éteint,Salle / Équipement,Faible,tableau interactif salle a eteint
 13,La salle C3 est trop froide,Salle / Équipement,Faible,salle trop froide
-14,Le système de son de l'amphithéâtre ne marche pas,Salle / Équipement,Élevé,système lamphithéâtre marche
-15,Climatisation défectueuse dans la salle D1,Salle / Équipement,Moyen,climatisation défectueuse salle
+14,Le système de son de l'amphithéâtre ne marche pas,Salle / Équipement,Élevé,systeme lamphitheatre marche
+15,Climatisation défectueuse dans la salle D1,Salle / Équipement,Moyen,climatisation defectueuse salle
 16,Le projecteur ne s'allume pas dans la salle E2,Salle / Équipement,Moyen,projecteur sallume salle e
-17,Problème avec la lumière de la salle F3,Salle / Équipement,Faible,problème lumière salle f
-18,Le rideau de la salle G4 est bloqué,Salle / Équipement,Faible,rideau salle g bloqué
+17,Problème avec la lumière de la salle F3,Salle / Équipement,Faible,probleme lumiere salle f
+18,Le rideau de la salle G4 est bloqué,Salle / Équipement,Faible,rideau salle g bloque
 19,La porte de la salle H5 ne se ferme pas,Salle / Équipement,Élevé,porte salle h ferme
-20,Problème d'écran interactif dans la salle I6,Salle / Équipement,Moyen,problème décran interactif salle i
-21,Mon ordinateur ne démarre plus depuis hier,Matériel informatique,Critique,ordinateur démarre plus depuis hier
+20,Problème d'écran interactif dans la salle I6,Salle / Équipement,Moyen,probleme decran interactif salle i
+21,Mon ordinateur ne démarre plus depuis hier,Matériel informatique,Critique,ordinateur demarre plus depuis hier
 22,L'imprimante du labo 3 ne fonctionne plus,Matériel informatique,Moyen,limprimante labo fonctionne plus
 23,Le scanner de documents est en panne,Matériel informatique,Moyen,scanner documents panne
-24,Problème avec le clavier de mon PC portable,Matériel informatique,Faible,problème clavier pc portable
-25,La souris sans fil ne répond pas,Matériel informatique,Faible,souris sans fil répond
-26,L'ordinateur de la salle D2 affiche un écran bleu,Matériel informatique,Critique,lordinateur salle affiche écran bleu
-27,Problème de mise à jour Windows sur mon PC,Matériel informatique,Moyen,problème mise jour windows pc
-28,Mon disque dur externe n'est pas détecté,Matériel informatique,Élevé,disque dur externe nest détecté
-29,L'ordinateur du bureau E3 est très lent,Matériel informatique,Moyen,lordinateur bureau e très lent
-30,L'écran de l'ordinateur de la salle F4 est noir,Matériel informatique,Élevé,lécran lordinateur salle f noir
-31,La télécommande du climatiseur est cassée,Télécommandes climatiseur,Faible,télécommande climatiseur cassée
-32,Impossible de régler la température de la salle, Télécommandes climatiseur,Faible,impossible régler température salle
-33,La télécommande ne répond plus,Télécommandes climatiseur,Moyen,télécommande répond plus
-34,Boutons de la télécommande endommagés,Télécommandes climatiseur,Faible,boutons télécommande endommagés
-35,La pile de la télécommande est morte,Télécommandes climatiseur,Faible,pile télécommande morte
-36,Problème avec la télécommande du climatiseur principal,Télécommandes climatiseur,Moyen,problème télécommande climatiseur principal
-37,La télécommande ne communique pas avec le climatiseur,Télécommandes climatiseur,Moyen,télécommande communique climatiseur
-38,La télécommande s'éteint toute seule,Télécommandes climatiseur,Faible,télécommande séteint toute seule
-39,Impossible de connecter la télécommande à l'appareil,Télécommandes climatiseur,Élevé,impossible connecter télécommande lappareil
-40,La télécommande ne fonctionne que par intermittence,Télécommandes climatiseur,Moyen,télécommande fonctionne intermittence
+24,Problème avec le clavier de mon PC portable,Matériel informatique,Faible,probleme clavier pc portable
+25,La souris sans fil ne répond pas,Matériel informatique,Faible,souris sans fil repond
+26,L'ordinateur de la salle D2 affiche un écran bleu,Matériel informatique,Critique,lordinateur salle affiche ecran bleu
+27,Problème de mise à jour Windows sur mon PC,Matériel informatique,Moyen,probleme mise jour windows pc
+28,Mon disque dur externe n'est pas détecté,Matériel informatique,Élevé,disque dur externe nest detecte
+29,L'ordinateur du bureau E3 est très lent,Matériel informatique,Moyen,lordinateur bureau e tres lent
+30,L'écran de l'ordinateur de la salle F4 est noir,Matériel informatique,Élevé,lecran lordinateur salle f noir
+31,La télécommande du climatiseur est cassée,Télécommandes climatiseur,Faible,telecommande climatiseur cassee
+32,Impossible de régler la température de la salle,Télécommandes climatiseur,Faible,impossible regler temperature salle
+33,La télécommande ne répond plus,Télécommandes climatiseur,Moyen,telecommande repond plus
+34,Boutons de la télécommande endommagés,Télécommandes climatiseur,Faible,boutons telecommande endommages
+35,La pile de la télécommande est morte,Télécommandes climatiseur,Faible,pile telecommande morte
+36,Problème avec la télécommande du climatiseur principal,Télécommandes climatiseur,Moyen,probleme telecommande climatiseur principal
+37,La télécommande ne communique pas avec le climatiseur,Télécommandes climatiseur,Moyen,telecommande communique climatiseur
+38,La télécommande s'éteint toute seule,Télécommandes climatiseur,Faible,telecommande seteint toute seule
+39,Impossible de connecter la télécommande à l'appareil,Télécommandes climatiseur,Élevé,impossible connecter telecommande lappareil
+40,La télécommande ne fonctionne que par intermittence,Télécommandes climatiseur,Moyen,telecommande fonctionne intermittence
+41,Impossible d'accéder à mon compte ENT ce matin,Compte bloqué,Élevé,impossible dacceder compte ent matin
+42,Session expirée en permanence toutes les 5 minutes,Compte bloqué,Élevé,session expiree permanence toutes minutes
+43,Lien de réinitialisation du mot de passe ne fonctionne pas,Compte bloqué,Élevé,lien reinitialisation mot passe fonctionne
+44,Email de confirmation non reçu pour activation compte,Compte bloqué,Moyen,email confirmation non recu activation compte
+45,Double authentification bloquée code SMS non reçu,Compte bloqué,Élevé,double authentification bloquee code sms non recu
+46,Compte suspendu sans notification préalable,Compte bloqué,Critique,compte suspendu sans notification prealable
+47,Impossible de changer adresse email du compte,Compte bloqué,Faible,impossible changer adresse email compte
+48,Câble HDMI manquant dans la salle de cours 201,Salle / Équipement,Faible,cable hdmi manquant salle cours
+49,Chaises cassées dans la salle B3 dangereuses,Salle / Équipement,Moyen,chaises cassees salle b dangereuses
+50,Manque de prises électriques salle pour les laptops,Salle / Équipement,Faible,manque prises electriques salle laptops
+51,Son du projecteur absent image visible mais pas audio,Salle / Équipement,Moyen,projecteur absent image visible audio
+52,Salle réservée occupée par autre groupe,Salle / Équipement,Élevé,salle reservee occupee autre groupe
+53,Batterie laptop ne charge plus reste à 5 pourcent,Matériel informatique,Moyen,batterie laptop charge plus reste pourcent
+54,Ventilateur PC fait bruit anormal surchauffe,Matériel informatique,Élevé,ventilateur pc fait bruit anormal surchauffe
+55,Port USB ne reconnaît aucun périphérique branché,Matériel informatique,Moyen,port usb reconnait aucun peripherique branche
+56,PC redémarre automatiquement toutes les heures,Matériel informatique,Critique,pc redemarre automatiquement toutes heures
+57,Écran fissuré suite chute laptop bureau,Matériel informatique,Élevé,ecran fissure suite chute laptop bureau
+58,Disque dur plein impossible sauvegarder fichiers,Matériel informatique,Élevé,disque dur plein impossible sauvegarder fichiers
+59,Télécommande perdue salle D4 climatiseur incontrôlable,Télécommandes climatiseur,Moyen,telecommande perdue salle climatiseur incontrolable
+60,Climatiseur bloqué en mode froid télécommande défaillante,Télécommandes climatiseur,Moyen,climatiseur bloque mode froid telecommande defaillante
+61,Pas de connexion internet depuis mon poste bureau,Réseau / Connexion,Élevé,connexion internet depuis poste bureau
+62,WiFi très lent dans la salle B2 impossible télécharger,Réseau / Connexion,Moyen,wifi tres lent salle b impossible telecharger
+63,Déconnexions fréquentes réseau toutes les 10 minutes,Réseau / Connexion,Élevé,deconnexions frequentes reseau toutes minutes
+64,VPN ne fonctionne pas connexion refusée depuis maison,Réseau / Connexion,Élevé,vpn fonctionne connexion refusee depuis maison
+65,Accès réseau partagé refusé dossier équipe inaccessible,Réseau / Connexion,Élevé,acces reseau partage refuse dossier equipe inaccessible
+66,DNS ne résout pas sites internet ne chargent pas,Réseau / Connexion,Élevé,dns resout sites internet chargent
+67,Connexion réseau instable salle 105 travaux pratiques,Réseau / Connexion,Moyen,connexion reseau instable salle travaux pratiques
+68,Pas de WiFi disponible dans le bloc C bâtiment,Réseau / Connexion,Élevé,wifi disponible bloc batiment
+69,Impossible accéder serveur interne depuis campus,Réseau / Connexion,Critique,impossible acceder serveur interne depuis campus
+70,Perte connexion internet pendant examen en ligne,Réseau / Connexion,Critique,perte connexion internet pendant examen ligne
+71,Application se ferme dès que je l'ouvre crash démarrage,Logiciel / Application,Moyen,application ferme des louvre crash demarrage
+72,Licence logiciel expirée impossible utiliser application,Logiciel / Application,Élevé,licence logiciel expiree impossible utiliser application
+73,Erreur installation logiciel code erreur 0x80070005,Logiciel / Application,Moyen,erreur installation logiciel code erreur x
+74,Excel plante quand j'ouvre fichiers lourds plus de 10Mo,Logiciel / Application,Moyen,excel plante quand jouvre fichiers lourds plus mo
+75,Antivirus bloque application dont j'ai besoin cours,Logiciel / Application,Élevé,antivirus bloque application dont jai besoin cours
+76,Logiciel gestion inaccessible depuis ce matin panne,Logiciel / Application,Élevé,logiciel gestion inaccessible depuis matin panne
+77,Erreur connexion base de données application métier,Logiciel / Application,Critique,erreur connexion base donnees application metier
+78,Application mobile ne synchronise pas données serveur,Logiciel / Application,Moyen,application mobile synchronise donnees serveur
+79,Logiciel de comptabilité affiche erreur au lancement,Logiciel / Application,Élevé,logiciel comptabilite affiche erreur lancement
+80,Navigateur très lent plante souvent pages ne chargent pas,Logiciel / Application,Faible,navigateur tres lent plante souvent pages chargent
+81,Serveur principal en panne tous les utilisateurs bloqués,Réseau / Connexion,Critique,serveur principal panne tous utilisateurs bloques
+82,Perte totale de données suite à panne disque dur urgent,Matériel informatique,Critique,perte totale donnees suite panne disque dur urgent
+83,Système informatique complètement inaccessible urgence,Logiciel / Application,Critique,systeme informatique completement inaccessible urgence
+84,Compte administrateur compromis accès non autorisé critique,Compte bloqué,Critique,compte administrateur compromis acces non autorise critique
+85,Coupure réseau totale bâtiment principal panne généralisée,Réseau / Connexion,Critique,coupure reseau totale batiment principal panne generalisee
+86,Base de données corrompue application métier inutilisable,Logiciel / Application,Critique,base donnees corrompue application metier inutilisable
+87,PC labo examens tous en panne session critique,Matériel informatique,Critique,pc labo examens tous panne session critique
+88,Intrusion détectée système sécurité compromis urgent,Compte bloqué,Critique,intrusion detectee systeme securite compromis urgent
+89,Salle examen équipement panne totale urgence immédiate,Salle / Équipement,Critique,salle examen equipement panne totale urgence immediate
+90,VPN entreprise inaccessible tous employés bloqués urgent,Réseau / Connexion,Critique,vpn entreprise inaccessible tous employes bloques urgent

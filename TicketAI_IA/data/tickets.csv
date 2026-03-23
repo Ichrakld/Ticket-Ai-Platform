@@ -30,7 +30,7 @@ id,texte,categorie,priorite
 29,L'ordinateur du bureau E3 est très lent,Matériel informatique,Moyen
 30,L'écran de l'ordinateur de la salle F4 est noir,Matériel informatique,Élevé
 31,La télécommande du climatiseur est cassée,Télécommandes climatiseur,Faible
-32,Impossible de régler la température de la salle, Télécommandes climatiseur,Faible
+32,Impossible de régler la température de la salle,Télécommandes climatiseur,Faible
 33,La télécommande ne répond plus,Télécommandes climatiseur,Moyen
 34,Boutons de la télécommande endommagés,Télécommandes climatiseur,Faible
 35,La pile de la télécommande est morte,Télécommandes climatiseur,Faible
@@ -39,3 +39,53 @@ id,texte,categorie,priorite
 38,La télécommande s'éteint toute seule,Télécommandes climatiseur,Faible
 39,Impossible de connecter la télécommande à l'appareil,Télécommandes climatiseur,Élevé
 40,La télécommande ne fonctionne que par intermittence,Télécommandes climatiseur,Moyen
+41,Impossible d'accéder à mon compte ENT ce matin,Compte bloqué,Élevé
+42,Session expirée en permanence toutes les 5 minutes,Compte bloqué,Élevé
+43,Lien de réinitialisation du mot de passe ne fonctionne pas,Compte bloqué,Élevé
+44,Email de confirmation non reçu pour activation compte,Compte bloqué,Moyen
+45,Double authentification bloquée code SMS non reçu,Compte bloqué,Élevé
+46,Compte suspendu sans notification préalable,Compte bloqué,Critique
+47,Impossible de changer adresse email du compte,Compte bloqué,Faible
+48,Câble HDMI manquant dans la salle de cours 201,Salle / Équipement,Faible
+49,Chaises cassées dans la salle B3 dangereuses,Salle / Équipement,Moyen
+50,Manque de prises électriques salle pour les laptops,Salle / Équipement,Faible
+51,Son du projecteur absent image visible mais pas audio,Salle / Équipement,Moyen
+52,Salle réservée occupée par autre groupe,Salle / Équipement,Élevé
+53,Batterie laptop ne charge plus reste à 5 pourcent,Matériel informatique,Moyen
+54,Ventilateur PC fait bruit anormal surchauffe,Matériel informatique,Élevé
+55,Port USB ne reconnaît aucun périphérique branché,Matériel informatique,Moyen
+56,PC redémarre automatiquement toutes les heures,Matériel informatique,Critique
+57,Écran fissuré suite chute laptop bureau,Matériel informatique,Élevé
+58,Disque dur plein impossible sauvegarder fichiers,Matériel informatique,Élevé
+59,Télécommande perdue salle D4 climatiseur incontrôlable,Télécommandes climatiseur,Moyen
+60,Climatiseur bloqué en mode froid télécommande défaillante,Télécommandes climatiseur,Moyen
+61,Pas de connexion internet depuis mon poste bureau,Réseau / Connexion,Élevé
+62,WiFi très lent dans la salle B2 impossible télécharger,Réseau / Connexion,Moyen
+63,Déconnexions fréquentes réseau toutes les 10 minutes,Réseau / Connexion,Élevé
+64,VPN ne fonctionne pas connexion refusée depuis maison,Réseau / Connexion,Élevé
+65,Accès réseau partagé refusé dossier équipe inaccessible,Réseau / Connexion,Élevé
+66,DNS ne résout pas sites internet ne chargent pas,Réseau / Connexion,Élevé
+67,Connexion réseau instable salle 105 travaux pratiques,Réseau / Connexion,Moyen
+68,Pas de WiFi disponible dans le bloc C bâtiment,Réseau / Connexion,Élevé
+69,Impossible accéder serveur interne depuis campus,Réseau / Connexion,Critique
+70,Perte connexion internet pendant examen en ligne,Réseau / Connexion,Critique
+71,Application se ferme dès que je l'ouvre crash démarrage,Logiciel / Application,Moyen
+72,Licence logiciel expirée impossible utiliser application,Logiciel / Application,Élevé
+73,Erreur installation logiciel code erreur 0x80070005,Logiciel / Application,Moyen
+74,Excel plante quand j'ouvre fichiers lourds plus de 10Mo,Logiciel / Application,Moyen
+75,Antivirus bloque application dont j'ai besoin cours,Logiciel / Application,Élevé
+76,Logiciel gestion inaccessible depuis ce matin panne,Logiciel / Application,Élevé
+77,Erreur connexion base de données application métier,Logiciel / Application,Critique
+78,Application mobile ne synchronise pas données serveur,Logiciel / Application,Moyen
+79,Logiciel de comptabilité affiche erreur au lancement,Logiciel / Application,Élevé
+80,Navigateur très lent plante souvent pages ne chargent pas,Logiciel / Application,Faible
+81,Serveur principal en panne tous les utilisateurs bloqués,Réseau / Connexion,Critique
+82,Perte totale de données suite à panne disque dur urgent,Matériel informatique,Critique
+83,Système informatique complètement inaccessible urgence,Logiciel / Application,Critique
+84,Compte administrateur compromis accès non autorisé critique,Compte bloqué,Critique
+85,Coupure réseau totale bâtiment principal panne généralisée,Réseau / Connexion,Critique
+86,Base de données corrompue application métier inutilisable,Logiciel / Application,Critique
+87,PC labo examens tous en panne session critique,Matériel informatique,Critique
+88,Intrusion détectée système sécurité compromis urgent,Compte bloqué,Critique
+89,Salle examen équipement panne totale urgence immédiate,Salle / Équipement,Critique
+90,VPN entreprise inaccessible tous employés bloqués urgent,Réseau / Connexion,Critique

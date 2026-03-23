@@ -10,7 +10,7 @@ import CreateTicket from './pages/CreateTicket';
 import TicketDetail from './pages/TicketDetail';
 import Profile from './pages/Profile';
 import AdminDashboard from './pages/AdminDashboard';
-
+import MFAVerify from './pages/MFAVerify';
 // Import TechnicienDashboard avec fallback si le fichier n'existe pas encore
 let TechnicienDashboard;
 try {
@@ -66,7 +66,9 @@ function App() {
           <Route path="/profile" element={
             <PrivateRoute><Navbar /><Profile /></PrivateRoute>
           } />
-
+          <Route path="/mfa/verify" element={
+            <PrivateRoute><MFAVerify /></PrivateRoute>
+          } />
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>
       </BrowserRouter>

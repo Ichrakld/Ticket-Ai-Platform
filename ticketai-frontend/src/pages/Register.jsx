@@ -50,7 +50,7 @@ export default function Register() {
       return;
     }
 
-    if (form.password.length < 8) {
+    if (form.password.length < 12) {
       setError('Password must be at least 8 characters');
       return;
     }
@@ -306,7 +306,7 @@ const styles = {
     alignItems: 'center',
     justifyContent: 'center',
     position: 'relative',
-    background: 'linear-gradient(135deg, #43cea2 0%, #185a9d 100%)',
+    background: 'linear-gradient(135deg, #16a34a 0%, #185a9d 100%)',
     fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, sans-serif",
     padding: '20px',
   },
@@ -370,7 +370,7 @@ const styles = {
   logoContainer: {
     width: '70px',
     height: '70px',
-    background: 'linear-gradient(135deg, #43cea2 0%, #185a9d 100%)',
+    background: 'linear-gradient(135deg, #16a34a 0%, #185a9d 100%)',
     borderRadius: '20px',
     display: 'flex',
     alignItems: 'center',
@@ -417,7 +417,7 @@ const styles = {
     display: 'flex',
     alignItems: 'center',
     gap: '10px',
-    color: '#52c41a',
+    color: '#16a34a',
     fontSize: '14px',
     animation: 'slideUp 0.3s ease-out',
   },
@@ -458,7 +458,7 @@ const styles = {
     outline: 'none',
     background: '#f8f9fa',
     ':focus': {
-      borderColor: '#43cea2',
+      borderColor: '#16a34a',
       background: 'white',
       boxShadow: '0 4px 12px rgba(67, 206, 162, 0.1)',
     },
@@ -524,7 +524,7 @@ const styles = {
     width: '18px',
     height: '18px',
     cursor: 'pointer',
-    accentColor: '#43cea2',
+    accentColor: '#16a34a',
   },
   termsText: {
     lineHeight: '1.5',
@@ -540,7 +540,7 @@ const styles = {
   submitButton: {
     width: '100%',
     padding: '16px',
-    background: 'linear-gradient(135deg, #43cea2 0%, #185a9d 100%)',
+    background: 'linear-gradient(135deg, #16a34a 0%, #185a9d 100%)',
     color: 'white',
     border: 'none',
     borderRadius: '12px',
@@ -588,7 +588,7 @@ const styles = {
     marginRight: '5px',
   },
   loginLink: {
-    color: '#43cea2',
+    color: '#16a34a',
     fontSize: '14px',
     textDecoration: 'none',
     fontWeight: '600',
@@ -621,7 +621,7 @@ const styles = {
     fontSize: '12px',
   },
   requirementMet: {
-    color: '#52c41a',
+    color: '#16a34a',
     marginBottom: '4px',
     fontSize: '12px',
   },

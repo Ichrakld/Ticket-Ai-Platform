@@ -24,7 +24,14 @@ export default function CreateTicket() {
       sessionStorage.setItem('ticketSuccess', '✅ Ticket créé avec succès — L\'IA l\'a classifié automatiquement !');
       navigate('/');
     } catch (err) {
-      setError(err.response?.data?.message || 'Erreur lors de la création du ticket');
+      // ← remplacer l'ancienne ligne par celle-ci
+      setError(
+        err.response?.data?.error ||
+        err.response?.data?.message ||
+        err.response?.data?.errors?.title?.[0] ||
+        err.response?.data?.errors?.description?.[0] ||
+        'Erreur lors de la création du ticket'
+      );
       setLoading(false);
     }
   };

@@ -1,35 +1,32 @@
 import pandas as pd
 import string
+import unicodedata
 import nltk
 from nltk.corpus import stopwords
 
-# download les stopwords français (une seule fois)
-nltk.download('stopwords')
+nltk.download('stopwords', quiet=True)
 
 df = pd.read_csv('../data/tickets.csv')
-
-# liste des stopwords français
 stop_words = set(stopwords.words('french'))
 
-# fonction de nettoyage
-
+def supprimer_accents(texte):
+    return ''.join(
+        c for c in unicodedata.normalize('NFD', texte)
+        if unicodedata.category(c) != 'Mn'
+    )
 
 def nettoyer_texte(texte):
-    # 1. minuscules
     texte = texte.lower()
-    # 2. supprimer ponctuation et chiffres
-    texte = texte.translate(str.maketrans(
-        '', '', string.punctuation + string.digits))
-    # 3. supprimer les stopwords
+    texte = texte.translate(str.maketrans('', '', string.punctuation + string.digits))
+    # 1. Supprimer stopwords AVANT accents
     mots = texte.split()
     mots = [mot for mot in mots if mot not in stop_words]
-    return ' '.join(mots)
+    texte = ' '.join(mots)
+    # 2. Supprimer accents APRÈS stopwords
+    texte = supprimer_accents(texte)
+    return texte
 
-
-# appliquer le nettoyage
 df['texte_nettoye'] = df['texte'].apply(nettoyer_texte)
-
 df.to_csv('../data/tickets_clean.csv', index=False)
-
-print("Nettoyage terminé ! Exemple :")
+print("Nettoyage terminé !")
 print(df[['texte', 'texte_nettoye']].head())

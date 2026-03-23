@@ -8,3 +8,5 @@ argon2-cffi==23.1.0
 httpx==0.27.0
 django-filter==24.2
 python-decouple==3.8
+pyotp
+jsonschema

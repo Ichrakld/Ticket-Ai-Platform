@@ -36,3 +36,16 @@ class IsOwnerOrTechnicienOrAdmin(BasePermission):
         if hasattr(obj, 'created_by'):
             return obj.created_by == request.user
         return False
+
+class IsOwnerOrReadOnly(BasePermission):
+    """Un utilisateur ne peut voir que ses propres tickets."""
+    def has_object_permission(self, request, view, obj):
+        # Admins et techniciens voient tout
+        if request.user.role in (Role.TECHNICIEN, Role.ADMIN):
+            return True
+        # Un utilisateur ne voit que ses propres ressources
+        if hasattr(obj, 'created_by'):
+            return obj.created_by == request.user
+        if hasattr(obj, 'user'):
+            return obj.user == request.user
+        return False

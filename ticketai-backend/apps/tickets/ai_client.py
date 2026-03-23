@@ -31,9 +31,18 @@ def analyze_ticket(title: str, description: str) -> dict:
         'text': f'{title}\n\n{description}',
     }
 
+    headers = {
+        'Content-Type': 'application/json',
+        'X-API-Key': getattr(settings, 'AI_SECRET_KEY', ''),  # ← sécurisé avec getattr
+    }
+
     try:
         with httpx.Client(timeout=settings.AI_SERVICE_TIMEOUT) as client:
-            response = client.post(settings.AI_SERVICE_URL, json=payload)
+            response = client.post(
+                settings.AI_SERVICE_URL,
+                json=payload,
+                headers=headers,  # ← ajouté
+            )
             response.raise_for_status()
             data = response.json()
     except httpx.TimeoutException:
