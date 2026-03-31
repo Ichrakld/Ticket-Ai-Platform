@@ -1,9 +1,12 @@
 # apps/users/otp.py
 import io
 import base64
+import logging
 import qrcode
 from django_otp.plugins.otp_totp.models import TOTPDevice
 from django_otp.plugins.otp_email.models import EmailDevice
+
+logger = logging.getLogger('security')
 
 
 # ══════════════════════════════════════════
@@ -12,7 +15,6 @@ from django_otp.plugins.otp_email.models import EmailDevice
 
 def generate_totp_secret(user):
     """Crée un nouveau TOTPDevice non confirmé pour l'utilisateur."""
-    # Supprimer les anciens devices non confirmés
     TOTPDevice.objects.filter(user=user, confirmed=False).delete()
     device = TOTPDevice.objects.create(
         user=user,
@@ -58,7 +60,7 @@ def get_confirmed_totp_device(user):
 
 
 # ══════════════════════════════════════════
-#  OTP Email — django-otp
+#  OTP Email — 100% django-otp
 # ══════════════════════════════════════════
 
 def setup_email_device(user):
@@ -78,18 +80,30 @@ def setup_email_device(user):
 
 
 def send_email_otp(user) -> bool:
-    """Génère et envoie l'OTP par email via django-otp."""
+    """Génère et envoie l'OTP via django-otp EmailDevice."""
     device = setup_email_device(user)
-    device.generate_challenge()  # génère + envoie l'email automatiquement
-    return True
+    try:
+        device.generate_challenge()
+        logger.info('EMAIL_OTP_SENT | user=%s', user.email)
+        return True
+    except Exception as e:
+        logger.error('EMAIL_OTP_SEND_ERROR | user=%s | error=%s',
+                     user.email, str(e))
+        return False
 
 
 def verify_email_otp(user, token: str) -> bool:
-    """Vérifie le code OTP email — usage unique."""
+    """Vérifie le code OTP email via django-otp — usage unique."""
     device = EmailDevice.objects.filter(
         user=user,
         confirmed=True
     ).first()
     if not device:
+        logger.warning('EMAIL_OTP_NO_DEVICE | user=%s', user.email)
         return False
-    return device.verify_token(token)
+    result = device.verify_token(token)
+    if result:
+        logger.info('EMAIL_OTP_VERIFIED | user=%s', user.email)
+    else:
+        logger.warning('EMAIL_OTP_FAILED | user=%s', user.email)
+    return result

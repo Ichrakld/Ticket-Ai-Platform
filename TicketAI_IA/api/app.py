@@ -20,9 +20,33 @@ priority_vectorizer = joblib.load('../models/tfidf_vectorizer_priority.joblib')
 
 STOP_WORDS = set(stopwords.words('french'))
 
+MOTS_CRITIQUES = [
+    "urgent critique",
+    "panne totale",
+    "tous bloques",
+    "urgence immediate",
+    "completement inaccessible",
+    "pirate",
+    "intrusion",
+    "compromis",
+]
+
+# Mots qui forcent Élevé (grave mais pas critique)
 MOTS_URGENTS = [
-    "urgent", "bloque", "impossible", "panne",
-    "ne fonctionne plus", "critique", "erreur"
+    "urgent",
+    "ne fonctionne plus",
+    "panne",
+    "bloque",
+]
+
+# Mots qui NE doivent PAS élever la priorité
+MOTS_NEUTRES = [
+    "impossible regler",       # télécommande → reste Faible
+    "impossible modifier",     # profil → reste Moyen
+    "impossible recevoir",     # notifications → reste Faible
+    "impossible changer",      # email → reste Faible
+    "impossible dajouter",     # document → reste Faible
+    "impossible telecharger",  # WiFi lent → reste Moyen
 ]
 
 def require_api_key(f):
@@ -53,11 +77,24 @@ def preprocess_texte(texte: str) -> str:
 
 def appliquer_regles_priorite(texte: str, prediction_ml: str) -> str:
     texte_lower = texte.lower()
+
+    # Vérifier si c'est un cas neutre — ne pas élever
+    for mot in MOTS_NEUTRES:
+        if mot in texte_lower:
+            return prediction_ml  # garder prédiction ML sans modification
+
+    # Vérifier mots critiques → forcer Critique
+    for mot in MOTS_CRITIQUES:
+        if mot in texte_lower:
+            return 'Critique'
+
+    # Vérifier mots urgents → élever à Élevé si Faible/Moyen
     for mot in MOTS_URGENTS:
         if mot in texte_lower:
             if prediction_ml in ['Faible', 'Moyen']:
                 return 'Élevé'
             return prediction_ml
+
     return prediction_ml
 
 @app.route('/predict', methods=['POST'])

@@ -53,7 +53,7 @@ ROOT_URLCONF = 'ticketai.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -309,13 +309,7 @@ OTP_EXPIRY_MINUTES = 10
 OTP_TOTP_ISSUER   = 'TicketAI'
 OTP_EMAIL_SENDER  = config('EMAIL_HOST_USER', default='ticketai@emsi-edu.ma')
 OTP_EMAIL_SUBJECT = 'TicketAI — Code de vérification'
-OTP_EMAIL_BODY_TEMPLATE = """
-Bonjour,
-
-Votre code de vérification TicketAI est : {token}
-
-Ce code expire dans 10 minutes.
-Ne partagez jamais ce code.
-
-— L'équipe TicketAI — NeuralDevSecurity
-"""
+# OTP Email — utilise le fichier template (token.txt)
+OTP_EMAIL_BODY_TEMPLATE = None          # ← forcer l'utilisation du fichier
+OTP_EMAIL_BODY_TEMPLATE_PATH = 'otp/email/token.txt'
+OTP_EMAIL_BODY_HTML_TEMPLATE_PATH = 'otp/email/token.html'

@@ -1,0 +1,8 @@
+Bonjour,
+
+Votre code de vérification TicketAI est : {{ token }}
+
+Ce code expire dans 10 minutes.
+Ne partagez jamais ce code avec personne.
+
+— L'équipe TicketAI — NeuralDevSecurity
