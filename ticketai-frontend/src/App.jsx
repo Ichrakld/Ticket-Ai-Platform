@@ -66,9 +66,9 @@ function App() {
           <Route path="/profile" element={
             <PrivateRoute><Navbar /><Profile /></PrivateRoute>
           } />
-          <Route path="/mfa/verify" element={
+          {/* <Route path="/mfa/verify" element={
             <PrivateRoute><MFAVerify /></PrivateRoute>
-          } />
+          } /> */}
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>
       </BrowserRouter>

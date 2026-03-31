@@ -89,3 +89,27 @@ id,texte,categorie,priorite,texte_nettoye
 88,Intrusion détectée système sécurité compromis urgent,Compte bloqué,Critique,intrusion detectee systeme securite compromis urgent
 89,Salle examen équipement panne totale urgence immédiate,Salle / Équipement,Critique,salle examen equipement panne totale urgence immediate
 90,VPN entreprise inaccessible tous employés bloqués urgent,Réseau / Connexion,Critique,vpn entreprise inaccessible tous employes bloques urgent
+91,La télécommande du climatiseur salle C2 a disparu,Télécommandes climatiseur,Faible,telecommande climatiseur salle a disparu
+92,La pile de la télécommande est morte besoin remplacement,Télécommandes climatiseur,Faible,pile telecommande morte besoin remplacement
+93,Boutons télécommande endommagés mais climatiseur fonctionne,Télécommandes climatiseur,Faible,boutons telecommande endommages climatiseur fonctionne
+94,Télécommande climatiseur fonctionne par intermittence,Télécommandes climatiseur,Faible,telecommande climatiseur fonctionne intermittence
+95,Chaise cassée dans la salle B3,Salle / Équipement,Faible,chaise cassee salle b
+96,Rideau de la salle G4 bloqué ne descend pas,Salle / Équipement,Faible,rideau salle g bloque descend
+97,Lumière salle F3 clignote légèrement,Salle / Équipement,Faible,lumiere salle f clignote legerement
+98,Câble HDMI manquant salle 201,Salle / Équipement,Faible,cable hdmi manquant salle
+99,Manque de prises électriques dans la salle pour les laptops,Salle / Équipement,Faible,manque prises electriques salle laptops
+100,Problème mineur avec le clavier PC portable touche coincée,Matériel informatique,Faible,probleme mineur clavier pc portable touche coincee
+101,Souris sans fil répond lentement pile faible,Matériel informatique,Faible,souris sans fil repond lentement pile faible
+102,Imprimante lente impression normale fonctionne,Matériel informatique,Faible,imprimante lente impression normale fonctionne
+103,Serveur principal en panne tous les utilisateurs sont bloqués urgent,Réseau / Connexion,Critique,serveur principal panne tous utilisateurs bloques urgent
+104,Perte totale connexion internet bâtiment principal panne généralisée critique,Réseau / Connexion,Critique,perte totale connexion internet batiment principal panne generalisee critique
+105,Base de données corrompue application métier complètement inutilisable urgent,Logiciel / Application,Critique,base donnees corrompue application metier completement inutilisable urgent
+106,PC labo examens tous en panne session critique urgence immédiate,Matériel informatique,Critique,pc labo examens tous panne session critique urgence immediate
+107,Intrusion détectée système compromis accès non autorisé critique urgent,Compte bloqué,Critique,intrusion detectee systeme compromis acces non autorise critique urgent
+108,Mon compte administrateur piraté accès non autorisé critique urgent,Compte bloqué,Critique,compte administrateur pirate acces non autorise critique urgent
+109,Salle examen projecteur panne totale urgence cours bloqué critique,Salle / Équipement,Critique,salle examen projecteur panne totale urgence cours bloque critique
+110,VPN entreprise inaccessible tous les employés bloqués urgent critique,Réseau / Connexion,Critique,vpn entreprise inaccessible tous employes bloques urgent critique
+111,Perte totale données suite panne disque dur urgent récupération impossible,Matériel informatique,Critique,perte totale donnees suite panne disque dur urgent recuperation impossible
+112,Système informatique complètement inaccessible toute école bloquée urgence,Logiciel / Application,Critique,systeme informatique completement inaccessible toute ecole bloquee urgence
+113,Climatiseur bloqué chauffage extrême salle examen critique urgent,Télécommandes climatiseur,Critique,climatiseur bloque chauffage extreme salle examen critique urgent
+114,Réseau WiFi totalement coupé amphithéâtre examen en cours urgent,Réseau / Connexion,Critique,reseau wifi totalement coupe amphitheatre examen cours urgent

@@ -89,3 +89,27 @@ id,texte,categorie,priorite
 88,Intrusion détectée système sécurité compromis urgent,Compte bloqué,Critique
 89,Salle examen équipement panne totale urgence immédiate,Salle / Équipement,Critique
 90,VPN entreprise inaccessible tous employés bloqués urgent,Réseau / Connexion,Critique
+91,La télécommande du climatiseur salle C2 a disparu,Télécommandes climatiseur,Faible
+92,La pile de la télécommande est morte besoin remplacement,Télécommandes climatiseur,Faible
+93,Boutons télécommande endommagés mais climatiseur fonctionne,Télécommandes climatiseur,Faible
+94,Télécommande climatiseur fonctionne par intermittence,Télécommandes climatiseur,Faible
+95,Chaise cassée dans la salle B3,Salle / Équipement,Faible
+96,Rideau de la salle G4 bloqué ne descend pas,Salle / Équipement,Faible
+97,Lumière salle F3 clignote légèrement,Salle / Équipement,Faible
+98,Câble HDMI manquant salle 201,Salle / Équipement,Faible
+99,Manque de prises électriques dans la salle pour les laptops,Salle / Équipement,Faible
+100,Problème mineur avec le clavier PC portable touche coincée,Matériel informatique,Faible
+101,Souris sans fil répond lentement pile faible,Matériel informatique,Faible
+102,Imprimante lente impression normale fonctionne,Matériel informatique,Faible
+103,Serveur principal en panne tous les utilisateurs sont bloqués urgent,Réseau / Connexion,Critique
+104,Perte totale connexion internet bâtiment principal panne généralisée critique,Réseau / Connexion,Critique
+105,Base de données corrompue application métier complètement inutilisable urgent,Logiciel / Application,Critique
+106,PC labo examens tous en panne session critique urgence immédiate,Matériel informatique,Critique
+107,Intrusion détectée système compromis accès non autorisé critique urgent,Compte bloqué,Critique
+108,Mon compte administrateur piraté accès non autorisé critique urgent,Compte bloqué,Critique
+109,Salle examen projecteur panne totale urgence cours bloqué critique,Salle / Équipement,Critique
+110,VPN entreprise inaccessible tous les employés bloqués urgent critique,Réseau / Connexion,Critique
+111,Perte totale données suite panne disque dur urgent récupération impossible,Matériel informatique,Critique
+112,Système informatique complètement inaccessible toute école bloquée urgence,Logiciel / Application,Critique
+113,Climatiseur bloqué chauffage extrême salle examen critique urgent,Télécommandes climatiseur,Critique
+114,Réseau WiFi totalement coupé amphithéâtre examen en cours urgent,Réseau / Connexion,Critique

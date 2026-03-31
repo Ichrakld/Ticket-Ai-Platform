@@ -1,5 +1,6 @@
 import logging
 from django.utils import timezone
+from django.core.cache import cache
 from rest_framework import status
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
@@ -11,9 +12,18 @@ from .throttles import LoginThrottle, RegisterThrottle
 from apps.audit.utils import log_action
 from .models import Role
 from .serializers import RegisterSerializer, UserPublicSerializer, CustomTokenObtainPairSerializer
-from .otp import generate_totp_secret, verify_totp, get_totp_uri
-from .email_otp import generate_email_otp, verify_email_otp, send_otp_email
-logger = logging.getLogger('apps.users')
+
+# ── django-otp imports (remplace pyotp + email_otp) ──
+from .otp import (
+    generate_totp_secret,
+    get_totp_qr,
+    verify_totp,
+    get_confirmed_totp_device,
+    send_email_otp,
+    verify_email_otp,
+)
+
+logger          = logging.getLogger('apps.users')
 security_logger = logging.getLogger('security')
 
 
@@ -24,9 +34,12 @@ def _get_client_ip(request):
     return request.META.get('REMOTE_ADDR', '0.0.0.0')
 
 
+# ══════════════════════════════════════════
+#  REGISTER
+# ══════════════════════════════════════════
 class RegisterView(APIView):
     permission_classes = [AllowAny]
-    throttle_classes = [RegisterThrottle]
+    throttle_classes   = [RegisterThrottle]
 
     def post(self, request):
         ip = _get_client_ip(request)
@@ -34,7 +47,8 @@ class RegisterView(APIView):
 
         serializer = RegisterSerializer(data=request.data)
         if not serializer.is_valid():
-            logger.warning('Registration validation failed | ip=%s | errors=%s', ip, serializer.errors)
+            logger.warning('Registration validation failed | ip=%s | errors=%s',
+                           ip, serializer.errors)
             return Response(
                 {'success': False, 'errors': serializer.errors},
                 status=status.HTTP_400_BAD_REQUEST
@@ -53,7 +67,8 @@ class RegisterView(APIView):
                 )
 
         user = serializer.save()
-        logger.info('User registered | email=%s | role=%s | ip=%s', user.email, user.role, ip)
+        logger.info('User registered | email=%s | role=%s | ip=%s',
+                    user.email, user.role, ip)
         log_action(action='USER_REGISTERED', user=user, ip_address=ip)
 
         return Response(
@@ -66,12 +81,15 @@ class RegisterView(APIView):
         )
 
 
+# ══════════════════════════════════════════
+#  LOGIN
+# ══════════════════════════════════════════
 class LoginView(TokenObtainPairView):
-    throttle_classes = [LoginThrottle]
-    serializer_class = CustomTokenObtainPairSerializer
+    throttle_classes  = [LoginThrottle]
+    serializer_class  = CustomTokenObtainPairSerializer
 
     def post(self, request, *args, **kwargs):
-        ip = _get_client_ip(request)
+        ip    = _get_client_ip(request)
         email = request.data.get('email', 'unknown')
         response = super().post(request, *args, **kwargs)
 
@@ -94,35 +112,46 @@ class LoginView(TokenObtainPairView):
         return response
 
 
+# ══════════════════════════════════════════
+#  LOGOUT
+# ══════════════════════════════════════════
 class LogoutView(APIView):
     permission_classes = [IsAuthenticated]
 
     def post(self, request):
-        ip = _get_client_ip(request)
+        ip         = _get_client_ip(request)
         logout_all = request.data.get('logout_all', False)
 
         if logout_all:
             tokens = OutstandingToken.objects.filter(user=request.user)
             for token in tokens:
                 BlacklistedToken.objects.get_or_create(token=token)
-            security_logger.info('LOGOUT_ALL | user=%s | ip=%s', request.user.email, ip)
+            security_logger.info('LOGOUT_ALL | user=%s | ip=%s',
+                                  request.user.email, ip)
             log_action(action='USER_LOGOUT_ALL', user=request.user, ip_address=ip)
-            return Response({'success': True, 'message': 'Toutes les sessions invalidées.'})
+            return Response({'success': True,
+                             'message': 'Toutes les sessions invalidées.'})
 
         refresh_token = request.data.get('refresh')
         if not refresh_token:
             return Response({'error': 'Refresh token requis.'}, status=400)
+
         try:
             token = RefreshToken(refresh_token)
             token.blacklist()
-            security_logger.info('LOGOUT | user=%s | ip=%s', request.user.email, ip)
+            security_logger.info('LOGOUT | user=%s | ip=%s',
+                                  request.user.email, ip)
             log_action(action='USER_LOGOUT', user=request.user, ip_address=ip)
             return Response({'success': True, 'message': 'Déconnecté avec succès.'})
         except Exception:
-            security_logger.warning('LOGOUT_FAILED invalid token | user=%s | ip=%s', request.user.email, ip)
+            security_logger.warning('LOGOUT_FAILED | user=%s | ip=%s',
+                                     request.user.email, ip)
             return Response({'error': 'Token invalide ou expiré.'}, status=400)
 
 
+# ══════════════════════════════════════════
+#  ME
+# ══════════════════════════════════════════
 class MeView(APIView):
     permission_classes = [IsAuthenticated]
 
@@ -130,62 +159,135 @@ class MeView(APIView):
         return Response(UserPublicSerializer(request.user).data)
 
 
+# ══════════════════════════════════════════
+#  MFA TOTP — Setup
+# ══════════════════════════════════════════
 class MFASetupView(APIView):
     permission_classes = [IsAuthenticated]
 
     def post(self, request):
-        user = request.user
-        if not user.otp_secret:
-            user.otp_secret = generate_totp_secret()
-            user.save(update_fields=['otp_secret'])
-            logger.info('MFA secret generated | user=%s', user.email)
-        uri = get_totp_uri(user.otp_secret, user.email)
-        return Response({'otpauth_uri': uri, 'secret': user.otp_secret})
+        user   = request.user
+        device = generate_totp_secret(user)   # crée TOTPDevice django-otp
+        data   = get_totp_qr(device)          # génère QR code base64
+        logger.info('MFA TOTP setup | user=%s', user.email)
+        log_action(action='MFA_SETUP', user=user,
+                   ip_address=_get_client_ip(request))
+        return Response(data)
 
 
+# ══════════════════════════════════════════
+#  MFA TOTP — Verify & Activate
+# ══════════════════════════════════════════
 class MFAVerifyView(APIView):
     permission_classes = [IsAuthenticated]
 
     def post(self, request):
-        ip = _get_client_ip(request)
-        token = request.data.get('token', '')
-        user = request.user
+        ip    = _get_client_ip(request)
+        token = request.data.get('token', '').strip()
+        user  = request.user
 
-        if not user.otp_secret:
-            logger.warning('MFA verify without setup | user=%s', user.email)
-            return Response({'error': 'MFA non configuré.'}, status=400)
+        if not token:
+            return Response({'error': 'Code requis.'}, status=400)
 
-        if verify_totp(user.otp_secret, token):
+        if verify_totp(user, token):
             user.mfa_enabled = True
             user.save(update_fields=['mfa_enabled'])
             security_logger.info('MFA_ENABLED | user=%s | ip=%s', user.email, ip)
-            return Response({'success': True, 'message': 'MFA activé.'})
+            log_action(action='MFA_ENABLED', user=user, ip_address=ip)
+            return Response({'success': True, 'message': 'MFA TOTP activé.'})
 
-        security_logger.warning('MFA_VERIFY_FAILED | user=%s | ip=%s', user.email, ip)
-        return Response({'error': 'Token invalide.'}, status=400)
+        security_logger.warning('MFA_VERIFY_FAILED | user=%s | ip=%s',
+                                 user.email, ip)
+        return Response({'error': 'Code invalide ou expiré.'}, status=400)
 
+
+# ══════════════════════════════════════════
+#  MFA Email OTP — Send
+# ══════════════════════════════════════════
+class SendEmailOTPView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def post(self, request):
+        user = request.user
+        ip   = _get_client_ip(request)
+
+        try:
+            send_email_otp(user)   # django-otp génère + envoie automatiquement
+        except Exception as e:
+            logger.error('EMAIL_OTP_ERROR | user=%s | error=%s',
+                         user.email, str(e))
+            return Response(
+                {'success': False, 'error': 'Impossible d\'envoyer l\'email.'},
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR
+            )
+
+        security_logger.info('EMAIL_OTP_SENT | user=%s | ip=%s', user.email, ip)
+        log_action(action='EMAIL_OTP_SENT', user=user, ip_address=ip)
+
+        return Response({
+            'success': True,
+            'message': f'Code envoyé à {user.email}. Valide 10 minutes.',
+        })
+
+
+# ══════════════════════════════════════════
+#  MFA Email OTP — Verify
+# ══════════════════════════════════════════
+class VerifyEmailOTPView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def post(self, request):
+        ip    = _get_client_ip(request)
+        token = request.data.get('token', '').strip()
+        user  = request.user
+
+        if not token:
+            return Response(
+                {'success': False, 'error': 'Code requis.'},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+
+        if verify_email_otp(user, token):
+            cache.set(f'mfa_verified:{user.id}', True, timeout=3600)
+            security_logger.info('EMAIL_OTP_VERIFIED | user=%s | ip=%s',
+                                  user.email, ip)
+            log_action(action='EMAIL_OTP_VERIFIED', user=user, ip_address=ip)
+            return Response({
+                'success': True,
+                'message': 'Identité vérifiée avec succès.',
+                'mfa_verified': True,
+            })
+
+        security_logger.warning('EMAIL_OTP_FAILED | user=%s | ip=%s',
+                                 user.email, ip)
+        return Response(
+            {'success': False, 'error': 'Code invalide ou expiré.'},
+            status=status.HTTP_400_BAD_REQUEST
+        )
+
+
+# ══════════════════════════════════════════
+#  UPDATE PROFILE / PASSWORD
+# ══════════════════════════════════════════
 class UpdateProfileView(APIView):
     permission_classes = [IsAuthenticated]
 
     def put(self, request):
         user = request.user
-        ip = _get_client_ip(request)
-        
-        current_password = request.data.get('current_password')
-        new_password = request.data.get('new_password')
+        ip   = _get_client_ip(request)
 
-        # Vérifier mot de passe actuel
+        current_password = request.data.get('current_password')
+        new_password     = request.data.get('new_password')
+
         if not user.check_password(current_password):
             security_logger.warning(
-                'PASSWORD_CHANGE_FAILED wrong current password | user=%s | ip=%s',
-                user.email, ip
+                'PASSWORD_CHANGE_FAILED | user=%s | ip=%s', user.email, ip
             )
             return Response(
                 {'success': False, 'error': 'Mot de passe actuel incorrect.'},
                 status=status.HTTP_400_BAD_REQUEST
             )
 
-        # Valider le nouveau mot de passe
         from django.contrib.auth.password_validation import validate_password
         from django.core.exceptions import ValidationError
         try:
@@ -199,15 +301,12 @@ class UpdateProfileView(APIView):
         user.set_password(new_password)
         user.save()
 
-        # Invalider tous les tokens existants après changement de mdp
-        from rest_framework_simplejwt.token_blacklist.models import OutstandingToken, BlacklistedToken
+        # Invalider tous les tokens après changement de mot de passe
         tokens = OutstandingToken.objects.filter(user=user)
-        for token in tokens:
-            BlacklistedToken.objects.get_or_create(token=token)
+        for t in tokens:
+            BlacklistedToken.objects.get_or_create(token=t)
 
-        security_logger.info(
-            'PASSWORD_CHANGED | user=%s | ip=%s', user.email, ip
-        )
+        security_logger.info('PASSWORD_CHANGED | user=%s | ip=%s', user.email, ip)
         log_action(action='PASSWORD_CHANGED', user=user, ip_address=ip)
 
         return Response({
@@ -215,12 +314,14 @@ class UpdateProfileView(APIView):
             'message': 'Mot de passe mis à jour. Veuillez vous reconnecter.'
         })
 
+
+# ══════════════════════════════════════════
+#  USER LIST — Admin only
+# ══════════════════════════════════════════
 class UserListView(APIView):
-    """GET /api/auth/users/ — Admin seulement"""
     permission_classes = [IsAuthenticated]
 
     def get(self, request):
-        from apps.users.permissions import IsAdmin
         if request.user.role != Role.ADMIN:
             return Response(
                 {'success': False, 'error': 'Accès refusé.'},
@@ -230,7 +331,6 @@ class UserListView(APIView):
         from .models import User
         users = User.objects.all().order_by('-created_at')
 
-        # Filtres optionnels
         role_filter = request.query_params.get('role')
         if role_filter:
             users = users.filter(role=role_filter)
@@ -243,75 +343,3 @@ class UserListView(APIView):
             'count': users.count(),
             'results': serializer.data,
         })
-    
-class SendEmailOTPView(APIView):
-    """
-    POST /api/auth/mfa/email/send
-    Envoie un OTP par email à l'utilisateur connecté.
-    """
-    permission_classes = [IsAuthenticated]
-
-    def post(self, request):
-        user = request.user
-        ip = _get_client_ip(request)
-
-        otp = generate_email_otp(user.id)
-        success = send_otp_email(user.email, user.id, otp)
-
-        if not success:
-            return Response(
-                {'success': False, 'error': 'Impossible d\'envoyer l\'email.'},
-                status=status.HTTP_500_INTERNAL_SERVER_ERROR
-            )
-
-        security_logger.info(
-            'EMAIL_OTP_SENT | user=%s | ip=%s', user.email, ip
-        )
-        log_action(action='EMAIL_OTP_SENT', user=user, ip_address=ip)
-
-        return Response({
-            'success': True,
-            'message': f'Code envoyé à {user.email}. Valide {10} minutes.',
-        })
-
-
-class VerifyEmailOTPView(APIView):
-    """
-    POST /api/auth/mfa/email/verify
-    Vérifie l'OTP reçu par email.
-    """
-    permission_classes = [IsAuthenticated]
-
-    def post(self, request):
-        user = request.user
-        ip = _get_client_ip(request)
-        token = request.data.get('token', '').strip()
-
-        if not token:
-            return Response(
-                {'success': False, 'error': 'Code requis.'},
-                status=status.HTTP_400_BAD_REQUEST
-            )
-
-        if verify_email_otp(user.id, token):
-            # Marquer MFA comme vérifié en cache pour cette session
-            cache.set(f'mfa_verified:{user.id}', True, timeout=3600)
-
-            security_logger.info(
-                'EMAIL_OTP_VERIFIED | user=%s | ip=%s', user.email, ip
-            )
-            log_action(action='EMAIL_OTP_VERIFIED', user=user, ip_address=ip)
-
-            return Response({
-                'success': True,
-                'message': 'Identité vérifiée avec succès.',
-                'mfa_verified': True,
-            })
-
-        security_logger.warning(
-            'EMAIL_OTP_FAILED | user=%s | ip=%s', user.email, ip
-        )
-        return Response(
-            {'success': False, 'error': 'Code invalide ou expiré.'},
-            status=status.HTTP_400_BAD_REQUEST
-        )

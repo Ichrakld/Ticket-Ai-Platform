@@ -23,6 +23,10 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt.token_blacklist',
     'corsheaders',
     'django_ratelimit',
+    'django_otp',                           # ← AJOUTER
+    'django_otp.plugins.otp_totp',          # ← AJOUTER
+    'django_otp.plugins.otp_email',         # ← AJOUTER
+    
     'apps.users',
     'apps.tickets',
     'apps.audit',
@@ -39,6 +43,7 @@ MIDDLEWARE = [
     'django.middleware.common.CommonMiddleware',
     'apps.core.csrf.CustomCsrfMiddleware', 
     'django.contrib.auth.middleware.AuthenticationMiddleware', # <--- ADDED
+    'django_otp.middleware.OTPMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',    # <--- ADDED
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
@@ -300,3 +305,17 @@ DEFAULT_FROM_EMAIL = config('EMAIL_HOST_USER')
 
 # OTP expiration en minutes
 OTP_EXPIRY_MINUTES = 10
+# django-otp configuration
+OTP_TOTP_ISSUER   = 'TicketAI'
+OTP_EMAIL_SENDER  = config('EMAIL_HOST_USER', default='ticketai@emsi-edu.ma')
+OTP_EMAIL_SUBJECT = 'TicketAI — Code de vérification'
+OTP_EMAIL_BODY_TEMPLATE = """
+Bonjour,
+
+Votre code de vérification TicketAI est : {token}
+
+Ce code expire dans 10 minutes.
+Ne partagez jamais ce code.
+
+— L'équipe TicketAI — NeuralDevSecurity
+"""
